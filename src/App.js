@@ -20,12 +20,24 @@ class BooksApp extends React.Component {
     }
   }
 
+  async componentDidMount() {
+    await this.getAllBooks()
+  }
+
+  async getAllBooks() {
+    const books = await BooksAPI.getAll();
+    this.setState({
+      books
+    });
+  }
+
+
   render() {
     return (
       <Router>
         <Switch>
           <Route exact path="/">
-            <Home />
+            <Home books={this.state.books}/>
           </Route>
           <Route path="/search">
             <Search />
