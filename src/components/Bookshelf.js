@@ -1,6 +1,15 @@
 import React, { Component } from 'react';
+import * as BooksAPI from '../BooksAPI';
 
 class Bookshelf extends Component {
+
+    async updateBookShelf(event, book, pageName) {
+        const updatedBooks = await BooksAPI.update(book, event.target.value);
+
+        this.setState({
+            books: updatedBooks,
+        });
+    }
 
     render() {
         return (
@@ -22,7 +31,10 @@ class Bookshelf extends Component {
                                         }} 
                                     />
                                     <div className="book-shelf-changer">
-                                        <select>
+                                        <select 
+                                            onChange={(event) => this.updateBookShelf(event, book)} 
+                                            value={book.shelf}
+                                        >
                                             <option value="move" disabled>Move to...</option>
                                             <option value="currentlyReading">Currently Reading</option>
                                             <option value="wantToRead">Want to Read</option>
