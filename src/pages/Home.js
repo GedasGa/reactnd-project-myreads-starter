@@ -5,7 +5,6 @@ import Bookshelf from '../components/Bookshelf';
 class Home extends Component {
     filterBooksByShelfType(type) {
         const { books } = this.props;
-        console.error('Books prop:', books);
         return books.filter((book) => book.shelf === type);
     }
 
