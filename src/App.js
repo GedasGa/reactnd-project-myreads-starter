@@ -15,7 +15,6 @@ import './App.css'
 class BooksApp extends React.Component {
   constructor(props) {
     super(props);
-    this.addBook = this.addBook.bind(this);
     this.updateBookShelf = this.updateBookShelf.bind(this);
     this.state = {
       books: []
@@ -28,7 +27,6 @@ class BooksApp extends React.Component {
 
   async getAllBooks() {
     const books = await BooksAPI.getAll();
-    console.log('All books:', books);
     this.setState({
       books
     });

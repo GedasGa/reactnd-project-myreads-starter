@@ -15,7 +15,6 @@ class Search extends Component {
     async getSearchResults(query) {
         if (query) {
             let searchResults = await BooksAPI.search(query)
-            console.log('search results: ', searchResults);
             if (searchResults.error) {
                 searchResults = []
             }
