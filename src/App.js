@@ -15,6 +15,7 @@ import './App.css'
 class BooksApp extends React.Component {
   constructor(props) {
     super(props);
+    this.addBook = this.addBook.bind(this);
     this.updateBookShelf = this.updateBookShelf.bind(this);
     this.state = {
       books: []
@@ -46,7 +47,7 @@ class BooksApp extends React.Component {
             <Home books={this.state.books} updateBookShelf={this.updateBookShelf}/>
           </Route>
           <Route path="/search">
-            <Search />
+            <Search updateBookShelf={this.updateBookShelf}/>
           </Route>
         </Switch>
       </Router>

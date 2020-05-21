@@ -15,6 +15,7 @@ class Search extends Component {
     async getSearchResults(query) {
         if (query) {
             let searchResults = await BooksAPI.search(query)
+            console.log('search results: ', searchResults);
             if (searchResults.error) {
                 searchResults = []
             }
@@ -30,6 +31,7 @@ class Search extends Component {
 
     render() {
         const { searchResults } = this.state;
+        const { updateBookShelf } = this.props;
 
         return (
             <div className="search-books">
@@ -57,7 +59,8 @@ class Search extends Component {
                 </div>
                 <div className="search-books-results">
                     <ol className="books-grid">
-                        {searchResults.map(book => <Book book={book} />)}
+                        {searchResults.map(book => 
+                            <Book key={book.id} book={book} isSearch={true} updateBookShelf={updateBookShelf}/>)}
                     </ol>
                 </div>
             </div>

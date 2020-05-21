@@ -22,17 +22,17 @@ class Home extends Component {
                         <Bookshelf 
                             books={this.filterBooksByShelfType('currentlyReading')} 
                             title={'Currently Reading'}
-                            onBookShelfUpdate={updateBookShelf}
+                            updateBookShelf={updateBookShelf}
                         />
                         <Bookshelf 
                             books={this.filterBooksByShelfType('wantToRead')} 
                             title={'Want to Read'}
-                            onBookShelfUpdate={updateBookShelf}
+                            updateBookShelf={updateBookShelf}
                         />
                         <Bookshelf 
                             books={this.filterBooksByShelfType('read')} 
                             title={'Read'}
-                            onBookShelfUpdate={updateBookShelf}
+                            updateBookShelf={updateBookShelf}
                         />
                     </div>
                 </div>

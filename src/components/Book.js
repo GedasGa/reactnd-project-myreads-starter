@@ -3,25 +3,24 @@ import React, { Component } from 'react';
 class Book extends Component {
 
     render() {
-        const { book, onBookShelfUpdate } = this.props;
+        const { book, updateBookShelf } = this.props;
 
         return (
             <li key={book.id}>
                 <div className="book">
                     <div className="book-top">
-                        {/* TODO: Extract styles file */}
                         <div 
                             className="book-cover" 
                             style={{ 
                                 width: 128, 
                                 height: 193, 
-                                backgroundImage: `url(${book.imageLinks ? book.imageLinks.smallThumbnail : ""})` 
+                                backgroundImage: `url(${book.imageLinks ? book.imageLinks.smallThumbnail : ''})` 
                             }} 
                         />
                         <div className="book-shelf-changer">
                             <select 
-                                onChange={(event) => onBookShelfUpdate(book, event.target.value)} 
-                                value={book.shelf}
+                                onChange={(event) => updateBookShelf(book, event.target.value)}
+                                value={book.shelf ? book.shelf : 'none'}
                             >
                                 <option value="move" disabled>Move to...</option>
                                 <option value="currentlyReading">Currently Reading</option>
