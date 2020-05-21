@@ -15,6 +15,7 @@ import './App.css'
 class BooksApp extends React.Component {
   constructor(props) {
     super(props);
+    this.updateBookShelf = this.updateBookShelf.bind(this);
     this.state = {
       books: []
     }
@@ -26,9 +27,15 @@ class BooksApp extends React.Component {
 
   async getAllBooks() {
     const books = await BooksAPI.getAll();
+    console.log('All books:', books);
     this.setState({
       books
     });
+  }
+
+  async updateBookShelf(book, shelf) {
+    await BooksAPI.update(book, shelf);
+    this.getAllBooks();
   }
 
   render() {
@@ -36,7 +43,7 @@ class BooksApp extends React.Component {
       <Router>
         <Switch>
           <Route exact path="/">
-            <Home books={this.state.books}/>
+            <Home books={this.state.books} updateBookShelf={this.updateBookShelf}/>
           </Route>
           <Route path="/search">
             <Search />

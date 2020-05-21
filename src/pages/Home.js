@@ -5,10 +5,13 @@ import Bookshelf from '../components/Bookshelf';
 class Home extends Component {
     filterBooksByShelfType(type) {
         const { books } = this.props;
+        console.error('Books prop:', books);
         return books.filter((book) => book.shelf === type);
     }
 
     render() {
+        const { updateBookShelf, history } = this.props;
+
         return (
             <div className="list-books">
                 <div className="list-books-title">
@@ -18,20 +21,23 @@ class Home extends Component {
                     <div>
                         <Bookshelf 
                             books={this.filterBooksByShelfType('currentlyReading')} 
-                            title={'Currently Reading'} 
+                            title={'Currently Reading'}
+                            onBookShelfUpdate={updateBookShelf}
                         />
                         <Bookshelf 
                             books={this.filterBooksByShelfType('wantToRead')} 
                             title={'Want to Read'}
+                            onBookShelfUpdate={updateBookShelf}
                         />
                         <Bookshelf 
                             books={this.filterBooksByShelfType('read')} 
-                            title={'Read'} 
+                            title={'Read'}
+                            onBookShelfUpdate={updateBookShelf}
                         />
                     </div>
                 </div>
                 <div className="open-search">
-                    <button onClick={() => this.props.history.push('/search')}>Add a book</button>
+                    <button onClick={() => history.push('/search')}>Add a book</button>
                 </div>
             </div>
         )
