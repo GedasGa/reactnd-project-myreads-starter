@@ -1,9 +1,36 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
-import { Link } from 'react-router-dom';;
+import { Link } from 'react-router-dom';
+import * as BooksAPI from '../BooksAPI';
+import Book from '../components/Book';
 
 class Search extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            searchResults: []
+        }
+    }
+
+    async getSearchResults(query) {
+        if (query) {
+            let searchResults = await BooksAPI.search(query)
+            if (searchResults.error) {
+                searchResults = []
+            }
+            this.setState({
+                searchResults
+            })
+        } else {
+            this.setState({
+                searchResults: []
+            })
+        }
+    }
+
     render() {
+        const { searchResults } = this.state;
+
         return (
             <div className="search-books">
                 <div className="search-books-bar">
@@ -21,11 +48,17 @@ class Search extends Component {
                         However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
                         you don't find a specific author or title. Every search is limited by search terms.
                         */}
-                        <input type="text" placeholder="Search by title or author"/>
+                        <input
+                        autoFocus={true} 
+                        type="text" 
+                        placeholder="Search by title or author" 
+                        onChange={(event) => this.getSearchResults(event.target.value)}/>
                     </div>
                 </div>
                 <div className="search-books-results">
-                    <ol className="books-grid"></ol>
+                    <ol className="books-grid">
+                        {searchResults.map(book => <Book book={book} />)}
+                    </ol>
                 </div>
             </div>
         )
