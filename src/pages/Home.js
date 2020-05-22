@@ -9,7 +9,7 @@ class Home extends Component {
     }
 
     render() {
-        const { updateBookShelf, history } = this.props;
+        const { updateBookShelf, getSelectedBookShelf, history } = this.props;
 
         return (
             <div className="list-books">
@@ -22,16 +22,19 @@ class Home extends Component {
                             books={this.filterBooksByShelfType('currentlyReading')} 
                             title={'Currently Reading'}
                             updateBookShelf={updateBookShelf}
+                            getSelectedBookShelf={getSelectedBookShelf}
                         />
                         <Bookshelf 
                             books={this.filterBooksByShelfType('wantToRead')} 
                             title={'Want to Read'}
                             updateBookShelf={updateBookShelf}
+                            getSelectedBookShelf={getSelectedBookShelf}
                         />
                         <Bookshelf 
                             books={this.filterBooksByShelfType('read')} 
                             title={'Read'}
                             updateBookShelf={updateBookShelf}
+                            getSelectedBookShelf={getSelectedBookShelf}
                         />
                     </div>
                 </div>
